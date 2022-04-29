@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<div class="link_header">
+  <a href="/schedule"> Schedule a Reservation!</a>
+  <a href="/"> Logout </a>
+</div>
+
+<h1>Reservations</h1>
+{% endblock %}
+
+{% block body %}
+  <table>
+    {% for reservation in reservations %}
+    <tr id="{{reservation.reservation_id}}" >
+      <form class="delete" id="{{reservation.reservation_id}}" action="/reservations/delete" method="POST">
+        <td>
+            {{ reservation.start_time.strftime('%A, %d %B %Y, %H:%M')}}
+        </td>
+        <td>
+          <input name="start_time" value="{{reservation.start_time}}" class="hidden">
+          <input type="submit" value="Cancel reservation">
+        </td>
+      </form>
+    </tr>
+    {% endfor %}
+    </table>
+  <script src="/static/js/script.js"></script>
+
+{% endblock %}
